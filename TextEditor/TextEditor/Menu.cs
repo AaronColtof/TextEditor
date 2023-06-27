@@ -97,7 +97,7 @@ namespace TextEditor
 
             if (CreationPathLabel.Text == "path") 
             {
-                ErrorProvider.SetError(CreationPathLabel, "The document has no ");
+                ErrorProvider.SetError(CreationPathLabel, "The document has no path specified");
                 return;
             }
 
