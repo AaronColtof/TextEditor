@@ -42,14 +42,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="TextEditor.exe" size="15280">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="TextEditor.exe" size="15792">
       <assemblyIdentity name="TextEditor" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>2BHfIya0wMrwUQPOUkD+3ZE6GfABYmeIYK2mN3Qqb94=</dsig:DigestValue>
+        <dsig:DigestValue>cU7KG+Z9PTtHoFG41IyQASuL53cV2ctukYEoFHG0Qdk=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

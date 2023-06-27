@@ -89,7 +89,29 @@ namespace TextEditor
 
         private void CreateDocumentButton_Click(object sender, EventArgs e)
         {
-            if (IsEncryptedCheckBox.Checked && EncryptionPasswordInput.Text == string.Empty) { return; }
+            if (DocumentNameTextBox.Text == string.Empty)
+            {
+                ErrorProvider.SetError(DocumentNameTextBox, "The document has no name");
+                return;
+            }
+
+            if (CreationPathLabel.Text == "path") 
+            {
+                ErrorProvider.SetError(CreationPathLabel, "The document has no ");
+                return;
+            }
+
+            if (IsEncryptedCheckBox.Checked && EncryptionPasswordInput.Text == string.Empty)
+            {
+                ErrorProvider.SetError(EncryptionPasswordInput, "No encryption password has been set");
+                return;
+            } else if (IsEncryptedCheckBox.Checked && EncryptionPasswordInput.Text != string.Empty) 
+            {
+                Program.SetEncryptionPassword(EncryptionPasswordInput.Text);
+            }
+
+
+            Program.CreateFileAndOpen(_filecreationlocation, DocumentNameTextBox.Text, IsEncryptedCheckBox.Checked);
         }
 
         private void OpenDocument_FileOk(object sender, CancelEventArgs e)
@@ -101,13 +123,17 @@ namespace TextEditor
         {
             OpenDocument.ShowDialog();
             string filelocation = OpenDocument.FileName;
-            if (Path.GetExtension(filelocation) == ".document" || Path.GetExtension(filelocation) == ".encrypteddocument")
+            if (Path.GetExtension(filelocation) == ".document")
             {
-                //file approved           
+                Program.OpenFile(filelocation, false);
+            } 
+            else if (Path.GetExtension(filelocation) == ".encrypteddocument") 
+            {
+                Program.OpenFile(filelocation, true);
             }
-            else 
+            else
             {
-                ErrorProvider.SetError(OpenDocumentButton, "Wrong extenstion, only .document and .encrypteddocument are readable via this editor!");
+                ErrorProvider.SetError(OpenDocumentButton, "Wrong extension, only .document and .encrypteddocument are readable via this editor!");
             }
         }
 
