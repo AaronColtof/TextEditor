@@ -1,0 +1,16 @@
+D:\C# projects\TextEditor\TextEditor\TextEditor\bin\Debug\TextEditor.exe.config
+D:\C# projects\TextEditor\TextEditor\TextEditor\bin\Debug\TextEditor.exe
+D:\C# projects\TextEditor\TextEditor\TextEditor\bin\Debug\TextEditor.pdb
+D:\C# projects\TextEditor\TextEditor\TextEditor\obj\Debug\TextEditor.csproj.AssemblyReference.cache
+D:\C# projects\TextEditor\TextEditor\TextEditor\obj\Debug\TextEditor.csproj.SuggestedBindingRedirects.cache
+D:\C# projects\TextEditor\TextEditor\TextEditor\obj\Debug\TextEditor.Properties.Resources.resources
+D:\C# projects\TextEditor\TextEditor\TextEditor\obj\Debug\TextEditor.csproj.GenerateResource.cache
+D:\C# projects\TextEditor\TextEditor\TextEditor\obj\Debug\TextEditor.csproj.CoreCompileInputs.cache
+D:\C# projects\TextEditor\TextEditor\TextEditor\obj\Debug\TextEditor.exe
+D:\C# projects\TextEditor\TextEditor\TextEditor\obj\Debug\TextEditor.pdb
+D:\C# projects\TextEditor\TextEditor\TextEditor\obj\Debug\TextEditor.Menu.resources
+D:\C# projects\TextEditor\TextEditor\TextEditor\bin\Debug\TextEditor.exe.manifest
+D:\C# projects\TextEditor\TextEditor\TextEditor\bin\Debug\TextEditor.application
+D:\C# projects\TextEditor\TextEditor\TextEditor\obj\Debug\TextEditor.TrustInfo.xml
+D:\C# projects\TextEditor\TextEditor\TextEditor\obj\Debug\TextEditor.exe.manifest
+D:\C# projects\TextEditor\TextEditor\TextEditor\obj\Debug\TextEditor.application
