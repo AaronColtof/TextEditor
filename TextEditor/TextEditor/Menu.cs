@@ -100,7 +100,15 @@ namespace TextEditor
         private void OpenDocumentButton_Click(object sender, EventArgs e)
         {
             OpenDocument.ShowDialog();
-            string filename = OpenDocument.FileName;
+            string filelocation = OpenDocument.FileName;
+            if (Path.GetExtension(filelocation) == ".document" || Path.GetExtension(filelocation) == ".encrypteddocument")
+            {
+                //file approved           
+            }
+            else 
+            {
+                ErrorProvider.SetError(OpenDocumentButton, "Wrong extenstion, only .document and .encrypteddocument are readable via this editor!");
+            }
         }
 
         private void FileLocation_Click(object sender, EventArgs e)
@@ -126,7 +134,7 @@ namespace TextEditor
 
         private void folderBrowserDialog_HelpRequest(object sender, EventArgs e)
         {
-
+            
         }
     }
 }

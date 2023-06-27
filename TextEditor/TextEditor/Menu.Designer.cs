@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.DocumentNameTextBox = new System.Windows.Forms.TextBox();
             this.ExstentionLabel = new System.Windows.Forms.Label();
             this.DocumentNameHeader = new System.Windows.Forms.Label();
@@ -45,6 +46,8 @@
             this.folderBrowserDialog = new System.Windows.Forms.FolderBrowserDialog();
             this.OpenPath = new System.Windows.Forms.Button();
             this.CreationPathLabel = new System.Windows.Forms.Label();
+            this.ErrorProvider = new System.Windows.Forms.ErrorProvider(this.components);
+            ((System.ComponentModel.ISupportInitialize)(this.ErrorProvider)).BeginInit();
             this.SuspendLayout();
             // 
             // DocumentNameTextBox
@@ -213,7 +216,11 @@
             this.CreationPathLabel.Text = "path";
             this.CreationPathLabel.Click += new System.EventHandler(this.CreationPathLabel_Click);
             // 
-            // Form1
+            // ErrorProvider
+            // 
+            this.ErrorProvider.ContainerControl = this;
+            // 
+            // Menu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -234,9 +241,10 @@
             this.Controls.Add(this.ExstentionLabel);
             this.Controls.Add(this.DocumentNameTextBox);
             this.MaximizeBox = false;
-            this.Name = "Form1";
+            this.Name = "Menu";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "TextEditor";
+            ((System.ComponentModel.ISupportInitialize)(this.ErrorProvider)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -260,6 +268,7 @@
         private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog;
         private System.Windows.Forms.Button OpenPath;
         private System.Windows.Forms.Label CreationPathLabel;
+        private System.Windows.Forms.ErrorProvider ErrorProvider;
     }
 }
 
