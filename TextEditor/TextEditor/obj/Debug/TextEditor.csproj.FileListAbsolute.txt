@@ -14,3 +14,5 @@ D:\C# projects\TextEditor\TextEditor\TextEditor\bin\Debug\TextEditor.application
 D:\C# projects\TextEditor\TextEditor\TextEditor\obj\Debug\TextEditor.TrustInfo.xml
 D:\C# projects\TextEditor\TextEditor\TextEditor\obj\Debug\TextEditor.exe.manifest
 D:\C# projects\TextEditor\TextEditor\TextEditor\obj\Debug\TextEditor.application
+D:\C# projects\TextEditor\TextEditor\TextEditor\obj\Debug\TextEditor.EncryptionPasswordScreen.resources
+D:\C# projects\TextEditor\TextEditor\TextEditor\obj\Debug\TextEditor.TextEditor.resources

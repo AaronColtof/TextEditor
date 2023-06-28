@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -14,6 +16,7 @@ namespace TextEditor
         /// <summary>
         /// The main entry point for the application.
         /// </summary>
+        /// 
         [STAThread]
         static void Main()
         {
@@ -28,23 +31,83 @@ namespace TextEditor
             {
                 FileStream fs = File.Create(path + name + ".document");
                 fs.Close();
+                OpenFile(path + name + ".document", false);
             }
             else if (isEncrypted)
             {
                 FileStream fs = File.Create(path + name + ".encrypteddocument");
+
+                string datastring = $"<encryptionkey={_encryptionpassword}>"; 
+                byte[] info = new UTF8Encoding(true).GetBytes(datastring);
+                fs.Write(info, 0, info.Length);
+
                 fs.Close();
+                OpenFile(path + name + ".encrypteddocument", true);
             }
         }
 
         public static void OpenFile(string path, bool isEncrypted) 
         {
-            //if encrypted go to password screen
+
+            if (isEncrypted) 
+            {
+                EncryptionPasswordScreen encryptionPasswordScreen = new EncryptionPasswordScreen();
+                encryptionPasswordScreen.Show();
+                encryptionPasswordScreen.selectedFile = path;
+            }
+
             //if not encrypted read text
+            TextEditor textEditor = new TextEditor();
+            textEditor.Show();
+        }
+
+        public static void TryDecryption(string path, string password, EncryptionPasswordScreen origin)
+        {
+            List<string> lines = new List<string>();
+
+            string key = string.Empty;
+
+            for (int i = 0; i < 10; i++)
+            {
+                key += password;
+            }
+
+            try 
+            {
+                var enumLines = File.ReadLines(path);
+
+                foreach (var line in enumLines) 
+                { 
+                    lines.Add(line);
+                }
+            }
+            
+            catch(FileNotFoundException) 
+            {
+                origin.FileNotAvailable();
+                return;
+            }
+
+            if (lines[0] == $"<encryptionkey={key}>")
+            {
+                //open file just like normal (with the text passed through the function)
+            }
+            else
+            {
+                origin.WrongPassword();
+            }
         }
 
         public static void SetEncryptionPassword(string encryptionpassword) 
-        { 
-            _encryptionpassword = encryptionpassword;
+        {
+            string key = string.Empty;
+
+            for (int i = 0; i < 10; i++) 
+            {
+                key += encryptionpassword;
+            }
+
+            _encryptionpassword = key;
         }
     }
 }

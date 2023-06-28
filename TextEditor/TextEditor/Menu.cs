@@ -112,6 +112,11 @@ namespace TextEditor
 
 
             Program.CreateFileAndOpen(_filecreationlocation, DocumentNameTextBox.Text, IsEncryptedCheckBox.Checked);
+
+            DocumentNameTextBox.Text = string.Empty;
+            _filecreationlocation = string.Empty;
+            CreationPathLabel.Text = string.Empty;
+            EncryptionPasswordInput.Text = string.Empty;
         }
 
         private void OpenDocument_FileOk(object sender, CancelEventArgs e)
