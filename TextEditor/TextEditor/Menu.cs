@@ -111,7 +111,7 @@ namespace TextEditor
             }
 
 
-            Program.CreateFileAndOpen(_filecreationlocation, DocumentNameTextBox.Text, IsEncryptedCheckBox.Checked);
+            Program.CreateFileAndOpen(_filecreationlocation, DocumentNameTextBox.Text, IsEncryptedCheckBox.Checked, this);
 
             DocumentNameTextBox.Text = string.Empty;
             _filecreationlocation = string.Empty;
@@ -130,11 +130,11 @@ namespace TextEditor
             string filelocation = OpenDocument.FileName;
             if (Path.GetExtension(filelocation) == ".document")
             {
-                Program.OpenFile(filelocation, false);
+                Program.OpenFile(filelocation, false, this);
             } 
             else if (Path.GetExtension(filelocation) == ".encrypteddocument") 
             {
-                Program.OpenFile(filelocation, true);
+                Program.OpenFile(filelocation, true, this);
             }
             else
             {
@@ -166,6 +166,11 @@ namespace TextEditor
         private void folderBrowserDialog_HelpRequest(object sender, EventArgs e)
         {
             
+        }
+
+        public void FileNotFound() 
+        {
+            ErrorProvider.SetError(OpenDocumentButton, "The file can't be found anymore");
         }
     }
 }

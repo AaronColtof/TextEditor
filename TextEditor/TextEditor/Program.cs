@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Windows.Forms.LinkLabel;
 
 namespace TextEditor
 {
@@ -25,13 +26,13 @@ namespace TextEditor
             Application.Run(new Menu());
         }
 
-        public static void CreateFileAndOpen(string path, string name, bool isEncrypted) 
+        public static void CreateFileAndOpen(string path, string name, bool isEncrypted, Menu origin) 
         {
             if (!isEncrypted) 
             {
                 FileStream fs = File.Create(path + name + ".document");
                 fs.Close();
-                OpenFile(path + name + ".document", false);
+                OpenFile(path + name + ".document", false, origin);
             }
             else if (isEncrypted)
             {
@@ -42,11 +43,11 @@ namespace TextEditor
                 fs.Write(info, 0, info.Length);
 
                 fs.Close();
-                OpenFile(path + name + ".encrypteddocument", true);
+                OpenFile(path + name + ".encrypteddocument", true, origin);
             }
         }
 
-        public static void OpenFile(string path, bool isEncrypted) 
+        public static void OpenFile(string path, bool isEncrypted, Menu origin) 
         {
 
             if (isEncrypted) 
@@ -56,9 +57,30 @@ namespace TextEditor
                 encryptionPasswordScreen.selectedFile = path;
             }
 
-            //if not encrypted read text
-            TextEditor textEditor = new TextEditor();
-            textEditor.Show();
+            if (!isEncrypted) 
+            {
+                List<string> lines = new List<string>();
+
+                try
+                {
+                    var enumLines = File.ReadLines(path);
+
+                    foreach (var line in enumLines)
+                    {
+                        lines.Add(line);
+                    }
+                }
+
+                catch (FileNotFoundException)
+                {
+                    origin.FileNotFound();
+                    return;
+                }
+
+                TextEditor textEditor = new TextEditor();
+                textEditor.UpdateTextBox(lines);
+                textEditor.Show();
+            }
         }
 
         public static void TryDecryption(string path, string password, EncryptionPasswordScreen origin)

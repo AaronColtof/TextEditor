@@ -16,5 +16,18 @@ namespace TextEditor
         {
             InitializeComponent();
         }
+
+        private void TextBox_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        public void UpdateTextBox(List<string> lines) 
+        {
+            for (int i = 0; i < lines.Count; i++) 
+            {
+                TextBox.AppendText($"{lines[i]}\n");
+            }
+        }
     }
 }
