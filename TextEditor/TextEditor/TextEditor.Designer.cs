@@ -28,9 +28,12 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.Header = new System.Windows.Forms.Label();
             this.TextBox = new System.Windows.Forms.TextBox();
             this.SaveDocument = new System.Windows.Forms.Button();
+            this.ErrorProvider = new System.Windows.Forms.ErrorProvider(this.components);
+            ((System.ComponentModel.ISupportInitialize)(this.ErrorProvider)).BeginInit();
             this.SuspendLayout();
             // 
             // Header
@@ -60,6 +63,11 @@
             this.SaveDocument.TabIndex = 18;
             this.SaveDocument.Text = "Save document";
             this.SaveDocument.UseVisualStyleBackColor = true;
+            this.SaveDocument.Click += new System.EventHandler(this.SaveDocument_Click);
+            // 
+            // ErrorProvider
+            // 
+            this.ErrorProvider.ContainerControl = this;
             // 
             // TextEditor
             // 
@@ -72,6 +80,7 @@
             this.Name = "TextEditor";
             this.Text = "TextEditor";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
+            ((System.ComponentModel.ISupportInitialize)(this.ErrorProvider)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -82,5 +91,6 @@
         private System.Windows.Forms.Label Header;
         private System.Windows.Forms.TextBox TextBox;
         private System.Windows.Forms.Button SaveDocument;
+        private System.Windows.Forms.ErrorProvider ErrorProvider;
     }
 }

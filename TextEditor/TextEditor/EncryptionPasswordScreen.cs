@@ -45,6 +45,11 @@ namespace TextEditor
             ErrorProvider.SetError(PasswordInput, "Incorrect password");
         }
 
+        public void DecryptionSuccessful() 
+        {
+            this.Close();
+        }
+
         private void PasswordInput_TextChanged(object sender, EventArgs e)
         {
 

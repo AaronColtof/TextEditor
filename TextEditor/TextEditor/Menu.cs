@@ -105,13 +105,10 @@ namespace TextEditor
             {
                 ErrorProvider.SetError(EncryptionPasswordInput, "No encryption password has been set");
                 return;
-            } else if (IsEncryptedCheckBox.Checked && EncryptionPasswordInput.Text != string.Empty) 
-            {
-                Program.SetEncryptionPassword(EncryptionPasswordInput.Text);
             }
 
 
-            Program.CreateFileAndOpen(_filecreationlocation, DocumentNameTextBox.Text, IsEncryptedCheckBox.Checked, this);
+            Program.CreateFileAndOpen(_filecreationlocation, DocumentNameTextBox.Text, IsEncryptedCheckBox.Checked, EncryptionPasswordInput.Text,this);
 
             DocumentNameTextBox.Text = string.Empty;
             _filecreationlocation = string.Empty;

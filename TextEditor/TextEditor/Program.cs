@@ -12,7 +12,6 @@ namespace TextEditor
 {
     internal static class Program
     {
-        private static string _encryptionpassword;
 
         /// <summary>
         /// The main entry point for the application.
@@ -26,7 +25,7 @@ namespace TextEditor
             Application.Run(new Menu());
         }
 
-        public static void CreateFileAndOpen(string path, string name, bool isEncrypted, Menu origin) 
+        public static void CreateFileAndOpen(string path, string name, bool isEncrypted, string encryptionPassword, Menu origin) 
         {
             if (!isEncrypted) 
             {
@@ -38,7 +37,14 @@ namespace TextEditor
             {
                 FileStream fs = File.Create(path + name + ".encrypteddocument");
 
-                string datastring = $"<encryptionkey={_encryptionpassword}>"; 
+                string key = string.Empty;
+
+                for (int i = 0; i < 10; i++)
+                {
+                    key += encryptionPassword;
+                }
+
+                string datastring = $"<encryptionkey={key}>"; 
                 byte[] info = new UTF8Encoding(true).GetBytes(datastring);
                 fs.Write(info, 0, info.Length);
 
@@ -63,7 +69,7 @@ namespace TextEditor
 
                 try
                 {
-                    var enumLines = File.ReadLines(path);
+                    var enumLines = File.ReadAllLines(path);
 
                     foreach (var line in enumLines)
                     {
@@ -78,8 +84,23 @@ namespace TextEditor
                 }
 
                 TextEditor textEditor = new TextEditor();
-                textEditor.UpdateTextBox(lines);
+                textEditor.UpdateTextBox(lines, path, isEncrypted, "");
                 textEditor.Show();
+            }
+        }
+
+        public static void SaveFile(List<string> text,string path, bool isEncrypted, TextEditor origin) 
+        {
+            if (isEncrypted)
+            {
+                File.Delete(path);
+                File.WriteAllLines(path, text);
+            }
+
+            if (!isEncrypted)
+            {
+                File.Delete(path);
+                File.WriteAllLines(path, text);
             }
         }
 
@@ -100,6 +121,7 @@ namespace TextEditor
 
                 foreach (var line in enumLines) 
                 { 
+                    //decrypt line with key
                     lines.Add(line);
                 }
             }
@@ -112,24 +134,16 @@ namespace TextEditor
 
             if (lines[0] == $"<encryptionkey={key}>")
             {
-                //open file just like normal (with the text passed through the function)
+                lines.RemoveAt(0);
+                TextEditor textEditor = new TextEditor();
+                textEditor.UpdateTextBox(lines, path, true, password);
+                textEditor.Show();
+                origin.DecryptionSuccessful();
             }
             else
             {
                 origin.WrongPassword();
             }
-        }
-
-        public static void SetEncryptionPassword(string encryptionpassword) 
-        {
-            string key = string.Empty;
-
-            for (int i = 0; i < 10; i++) 
-            {
-                key += encryptionpassword;
-            }
-
-            _encryptionpassword = key;
         }
     }
 }
